@@ -13,26 +13,32 @@ public class ImpPersonaService implements IPersonaService{
     
     @Override
     public List<Persona> getPersona() {
-        List<Persona> persona = ipersonaRepository.findAll();
-        return persona;
+        List<Persona> listapersona = ipersonaRepository.findAll();
+        return listapersona;
         
     }
        
     @Override
-    public void savePersona(Persona persona) {
+    public String savePersona(Persona persona) {
+
         ipersonaRepository.save(persona);
+        return null;
     }
 
     @Override
-    public void deletePersona(Long id) {
+    public String deletePersona(Long id) {
+
         ipersonaRepository.deleteById(id);
+        return null;
     }
 
     @Override
     public Persona FindPersona(Long id) {
-        Persona persona = ipersonaRepository.findById(id).orElse(null);
-        return persona;
+        Persona pers = ipersonaRepository.findById(id).orElse(null);
+        return pers;
         
     }
+
+
     
 }

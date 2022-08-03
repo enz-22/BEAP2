@@ -15,16 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RestController
-@CrossOrigin(origins = "https://appieac.web.app/")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class AuthApi {
     @Autowired
     AuthenticationManager authManager;
     @Autowired
     JwtTokenUtil jwtTokeUtil;
-    @PostMapping("/api/login")
+    @PostMapping("api/login")
     public ResponseEntity<?> login(@RequestBody @Valid AuthRequest request){
         try{
             Authentication authentication = authManager.authenticate(

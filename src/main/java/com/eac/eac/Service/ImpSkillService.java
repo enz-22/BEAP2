@@ -12,23 +12,25 @@ public class ImpSkillService implements ISkillService {
     @Autowired ISkillRepository iskillRepository;
     @Override
     public List<Skill> getSkill() {
-        List<Skill> skill = iskillRepository.findAll();
-        return skill;
+        List<Skill> listaskill = iskillRepository.findAll();
+        return listaskill;
     }
 
     @Override
-    public void saveSkill(Skill skill) {
+    public String saveSkill(Skill skill) {
         iskillRepository.save(skill);
+        return null;
     }
 
     @Override 
-    public void deleteSkill(Long idskill) {
+    public String deleteSkill(Long idskill) {
         iskillRepository.deleteById(idskill);
+        return null;
     }
 
     @Override
     public Skill FindSkill(Long idskill) {
-        Skill skill = iskillRepository.findById(idskill).orElse(null);
-        return skill;
+        Skill skil = iskillRepository.findById(idskill).orElse(null);
+        return skil;
     }
 }

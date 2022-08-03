@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ISkillService {
     public List<Skill> getSkill();
-    public void saveSkill(Skill skill);
-    public void deleteSkill (Long idskill);
+    public String saveSkill(Skill skill);
+    public String deleteSkill (Long idskill);
     public Skill FindSkill(Long idskill);
 }

@@ -5,29 +5,66 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
 
-@Getter @Setter
 @Entity
 public class Acerca implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idacerca;
-    @NotNull
-    @Size(min = 1, max = 50, message = "50 caracteres")
     private String nombreacerca;
-    @NotNull
-    @Size(min = 1, max = 500, message = "500 caracteres")
     private String contactoacerca;
-    @NotNull
-    @Size(min = 1, max = 500, message = "500 caracteres")
     private String detalleacerca;
-    @NotNull
-    @Size(min = 1, max = 250, message = "250 caracteres")
     private String fotoacerca;
-    
+
+    public Acerca() {
+    }
+
+    public Acerca(Long idacerca, String nombreacerca, String contactoacerca, String detalleacerca, String fotoacerca) {
+        this.idacerca = idacerca;
+        this.nombreacerca = nombreacerca;
+        this.contactoacerca = contactoacerca;
+        this.detalleacerca = detalleacerca;
+        this.fotoacerca = fotoacerca;
+    }
+
+    public Long getIdacerca() {
+        return idacerca;
+    }
+
+    public void setIdacerca(Long idacerca) {
+        this.idacerca = idacerca;
+    }
+
+    public String getNombreacerca() {
+        return nombreacerca;
+    }
+
+    public void setNombreacerca(String nombreacerca) {
+        this.nombreacerca = nombreacerca;
+    }
+
+    public String getContactoacerca() {
+        return contactoacerca;
+    }
+
+    public void setContactoacerca(String contactoacerca) {
+        this.contactoacerca = contactoacerca;
+    }
+
+    public String getDetalleacerca() {
+        return detalleacerca;
+    }
+
+    public void setDetalleacerca(String detalleacerca) {
+        this.detalleacerca = detalleacerca;
+    }
+
+    public String getFotoacerca() {
+        return fotoacerca;
+    }
+
+    public void setFotoacerca(String fotoacerca) {
+        this.fotoacerca = fotoacerca;
+    }
 }

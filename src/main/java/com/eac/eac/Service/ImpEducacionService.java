@@ -15,20 +15,22 @@ public class ImpEducacionService implements IEducacionService {
     @Autowired IEducacionRepository ieducacionRepository;
     @Override
     public List<Educacion> getEducacion() {
-        List<Educacion> educacion = ieducacionRepository.findAll();
-        return educacion;
+        List<Educacion> listaeducacion = ieducacionRepository.findAll();
+        return listaeducacion;
     }
     @Override
-    public void saveEducacion(Educacion educacion) {
+    public String saveEducacion(Educacion educacion) {
         ieducacionRepository.save(educacion);
+        return null;
     }
     @Override
-    public void deleteEducacion(Long ideducacion) {
+    public String deleteEducacion(Long ideducacion) {
         ieducacionRepository.deleteById(ideducacion);
+        return null;
     }
     @Override
     public Educacion FindEducacion(Long ideducacion) {
-        Educacion educacion = ieducacionRepository.findById(ideducacion).orElse(null);
-        return educacion;
+        Educacion educ = ieducacionRepository.findById(ideducacion).orElse(null);
+        return educ;
     }
 }

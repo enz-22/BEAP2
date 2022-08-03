@@ -12,24 +12,26 @@ public class ImpAcercaService implements IAcercaService {
     @Autowired IAcercaRepository iacercaRepository;
     @Override
     public List<Acerca> getAcerca() {
-        List<Acerca> acerca = iacercaRepository.findAll();
-        return acerca;
+        List<Acerca> listaacercas = iacercaRepository.findAll();
+        return listaacercas;
     }
 
     @Override
-    public void saveAcerca(Acerca acerca) {
+    public String saveAcerca(Acerca acerca) {
         iacercaRepository.save(acerca);
+        return null;
     }
 
     @Override
-    public void deleteAcerca(Long idacerca) {
+    public String deleteAcerca(Long idacerca) {
         iacercaRepository.deleteById(idacerca);
+        return null;
     }
 
     @Override
     public Acerca FindAcerca(Long idacerca) {
-        Acerca acerca = iacercaRepository.findById(idacerca).orElse(null);
-        return acerca;
+        Acerca acer = iacercaRepository.findById(idacerca).orElse(null);
+        return acer;
     }
     
 }

@@ -12,8 +12,8 @@ public class ImpExperienciaService implements IExperienciaService {
     @Autowired IExperienciaRepository iexperienciaRepository;
     @Override
     public List<Experiencia> getExperiencia() {
-        List<Experiencia> experiencia = iexperienciaRepository.findAll();
-        return experiencia;
+        List<Experiencia> listaexperiencia = iexperienciaRepository.findAll();
+        return listaexperiencia;
     }
 
     @Override

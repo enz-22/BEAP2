@@ -4,8 +4,8 @@ import com.eac.eac.Entity.Acerca;
 import java.util.List;
 
 public interface IAcercaService {
-    public List<Acerca> getAcerca();
-    public void saveAcerca(Acerca acerca);
-    public void deleteAcerca (Long idacerca);
-    public Acerca FindAcerca(Long idacerca);
+    List<Acerca> getAcerca();
+    String saveAcerca(Acerca acerca);
+    String deleteAcerca (Long idacerca);
+    Acerca FindAcerca(Long idacerca);
 }

@@ -3,49 +3,39 @@ package com.eac.eac.Controller;
 import com.eac.eac.Entity.Educacion;
 import com.eac.eac.Interface.IEducacionService;
 import java.util.List;
+import com.eac.eac.Service.ImpEducacionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-public class EducacionController {
+@RequestMapping("api/educaciones")
+public class EducacionController extends ImpEducacionService {
     @Autowired 
     public IEducacionService iEducacionService;
     
-    @GetMapping("/api/educaciones/traer")
+    @GetMapping("/traer")
     public List<Educacion> getEducacion(){
+
         return iEducacionService.getEducacion();
     }
-    
-    @PostMapping("/api/educaciones/crear")
-    public String createEducacion(@RequestBody Educacion educacion){
-        iEducacionService.saveEducacion(educacion);
+
+
+    @PostMapping("/crear")
+    public String saveEducacion(@RequestBody Educacion educ){
+        iEducacionService.saveEducacion(educ);
         return "creado correctamente";
     }
     
-    @DeleteMapping("/api/educaciones/borrar/{id}")
+    @DeleteMapping("/borrar/{ideducacion}")
     public String deleteEducacion(@PathVariable Long ideducacion){
-    iEducacionService.deleteEducacion(ideducacion);
-    return "borrado correctamente";
+        iEducacionService.deleteEducacion(ideducacion);
+        return null;
     }
     
-    @PutMapping("/api/educacion/editar/{id}")
-    public Educacion editEducacion(@PathVariable Long ideducacion,
-            @RequestParam("educacion1") String nuevoEducacion1,
-            @RequestParam("educacion2") String nuevoEducacion2,
-            @RequestParam("educacion3") String nuevoEducacion3,
-            @RequestParam("educacion4") String nuevoEducacion4)
-                             
-                              {
+    @PutMapping("/editar/{ideducacion}")
+    public Educacion editEducacion(@PathVariable Long ideducacion,@RequestParam("educacion1") String nuevoEducacion1,@RequestParam("educacion2") String nuevoEducacion2,@RequestParam("educacion3") String nuevoEducacion3,@RequestParam("educacion4") String nuevoEducacion4) {
                                   
       Educacion educacion = iEducacionService.FindEducacion(ideducacion);
       educacion.setEducacion1(nuevoEducacion1);
@@ -56,6 +46,8 @@ public class EducacionController {
       iEducacionService.saveEducacion(educacion);
       return educacion;
     }
-    
+    @GetMapping("/traer/{ideducacion}")
+    public Educacion FindEducacion(Long ideducacion){return iEducacionService.FindEducacion(ideducacion);
+    }
    
 }
