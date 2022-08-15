@@ -1,56 +1,51 @@
 package com.eac.eac.Controller;
 
 import com.eac.eac.Entity.Skill;
-import com.eac.eac.Interface.ISkillService;
-import java.util.List;
 import com.eac.eac.Service.ImpSkillService;
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
-@CrossOrigin(origins = "https://localhost:4200")
+
 @RestController
-@RequestMapping("/api/skills")
-public class SkillController extends ImpSkillService {
-    @Autowired ISkillService iskillService;
-    
-    @GetMapping("/traer")
-    public List<Skill> getSkill(){
+@CrossOrigin("*")
+@RequestMapping("api/skills")
+public class SkillController {
 
-        return iskillService.getSkill();
+    private final ImpSkillService impSkillService;
+
+    public SkillController(ImpSkillService impSkillService) {
+        this.impSkillService = impSkillService;
     }
 
-    @PostMapping("/crear")
-    public String saveSkill(@RequestBody Skill skill){
-        iskillService.saveSkill(skill);
-        return "creado correctamente";
+    @GetMapping("/id/{idSkill}")
+    public ResponseEntity<Skill> obtenerSkill(@PathVariable("idSkill") Long idSkill){
+        Skill skill=impSkillService.buscarIdSkill(idSkill);
+        return new ResponseEntity<>(skill, HttpStatus.OK);
     }
 
-    @DeleteMapping("/borrar/{idskill}")
-    public String deleteSkill(@PathVariable Long idskill){
-    iskillService.deleteSkill(idskill);
-    return "borrado correctamente";
-    }
-    
-    @PutMapping("/editar/{idskill}")
-    public Skill editSkill(@PathVariable Long idskill,
-            @RequestParam("uno") String nuevoUno,@RequestParam("dos") String nuevoDos,@RequestParam("tres") String nuevoTres,@RequestParam("cuatro") String nuevoCuatro,@RequestParam("cinco") String nuevoCinco,@RequestParam("seis") String nuevoSeis,@RequestParam("siete") String nuevoSiete,@RequestParam("ocho") String nuevoOcho){
-                                  
-      Skill skill = iskillService.FindSkill(idskill);
-      skill.setUno(nuevoUno);
-      skill.setDos(nuevoDos);
-      skill.setTres(nuevoTres);
-      skill.setCuatro(nuevoCuatro);
-      skill.setCinco(nuevoCinco);
-      skill.setSeis(nuevoSeis);
-      skill.setSiete(nuevoSiete);
-      skill.setOcho(nuevoOcho);
-      
-      iskillService.saveSkill(skill);
-      return skill;
+    @PutMapping("/update")
+    public ResponseEntity<Skill> editarSkill(@RequestBody Skill skill){
+        Skill updateSkill=impSkillService.editarSkill(skill);
+        return new ResponseEntity<>(updateSkill,HttpStatus.OK);
     }
 
-    @GetMapping("/traer/{idskill}")
-    public Skill findSkill(Long idskill){
-        return iskillService.FindSkill(idskill);
+    @GetMapping("/all")
+    public ResponseEntity<List<Skill>> buscarSkill(){
+        List<Skill> skillLista=impSkillService.buscarSkill();
+        return new ResponseEntity<>(skillLista,HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Skill> crearSkill(@RequestBody Skill skill){
+        Skill nuevoSkill=impSkillService.addSkill(skill);
+        return new ResponseEntity<>(nuevoSkill,HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{idSkill}")
+    public ResponseEntity<?> borrarSkill(@PathVariable("idSkill") Long idSkill){
+        impSkillService.borrarSkill(idSkill);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

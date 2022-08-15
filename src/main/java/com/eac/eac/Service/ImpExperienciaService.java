@@ -1,39 +1,40 @@
 package com.eac.eac.Service;
 
 import com.eac.eac.Entity.Experiencia;
-import com.eac.eac.Interface.IExperienciaService;
 import com.eac.eac.Repository.IExperienciaRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
+import java.util.List;
+
 
 @Service
-public class ImpExperienciaService implements IExperienciaService {
-    @Autowired IExperienciaRepository iexperienciaRepository;
-    @Override
-    public List<Experiencia> getExperiencia() {
-        List<Experiencia> listaexperiencia = iexperienciaRepository.findAll();
-        return listaexperiencia;
+@Transactional
+public class ImpExperienciaService {
+    private final IExperienciaRepository iexperienciaRepository;
+
+    @Autowired
+    public ImpExperienciaService(IExperienciaRepository iexperienciaRepository) {
+        this.iexperienciaRepository = iexperienciaRepository;
     }
 
-    @Override
-    public void saveExperiencia(Experiencia experiencia) {
-        iexperienciaRepository.save(experiencia);
+    public Experiencia addExperiencia(Experiencia experiencia){
+        return iexperienciaRepository.save(experiencia);
     }
 
-    @Override 
-    public void deleteExperiencia(Long idexperiencia) {
-        iexperienciaRepository.deleteById(idexperiencia);
+    public List<Experiencia> buscarExperiencia(){
+        return iexperienciaRepository.findAll();
     }
 
-    @Override
-    public Experiencia FindExperiencia(Long idexperiencia) {
-        Experiencia experiencia = iexperienciaRepository.findById(idexperiencia).orElse(null);
-        return experiencia;
+    public Experiencia editarExperiencia(Experiencia experiencia){
+        return iexperienciaRepository.save(experiencia);
     }
 
-    
+    public void borrarExperiencia(Long idExp){
+        iexperienciaRepository.deleteById(idExp);
+    }
 
-    
-    
+    public Experiencia buscarIdExperiencia(Long idExp){
+        return iexperienciaRepository.findById(idExp).orElseThrow(null);
+    }
 }

@@ -1,16 +1,14 @@
 package com.eac.eac.Entity;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 @Entity
-public class Acerca implements Serializable {
+public class Acerca {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idacerca;
     private String nombreacerca;
     private String contactoacerca;

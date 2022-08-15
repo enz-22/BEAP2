@@ -1,37 +1,39 @@
 package com.eac.eac.Service;
 
 import com.eac.eac.Entity.Acerca;
-import com.eac.eac.Interface.IAcercaService;
 import com.eac.eac.Repository.IAcercaRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
-public class ImpAcercaService implements IAcercaService {
-    @Autowired IAcercaRepository iacercaRepository;
-    @Override
-    public List<Acerca> getAcerca() {
-        List<Acerca> listaacercas = iacercaRepository.findAll();
-        return listaacercas;
+@Transactional
+public class ImpAcercaService {
+    public final IAcercaRepository iacercaRepository;
+
+    @Autowired
+    public ImpAcercaService(IAcercaRepository iacercaRepository) {
+        this.iacercaRepository = iacercaRepository;
     }
 
-    @Override
-    public String saveAcerca(Acerca acerca) {
-        iacercaRepository.save(acerca);
-        return null;
+    public Acerca addAcerca(Acerca acerca){
+        return iacercaRepository.save(acerca);
     }
 
-    @Override
-    public String deleteAcerca(Long idacerca) {
+    public List<Acerca> buscarAcerca(){
+        return iacercaRepository.findAll();
+    }
+
+    public Acerca editarAcerca(Acerca acerca){
+        return iacercaRepository.save(acerca);
+    }
+
+    public void borrarAcerca(Long idacerca){
         iacercaRepository.deleteById(idacerca);
-        return null;
     }
 
-    @Override
-    public Acerca FindAcerca(Long idacerca) {
-        Acerca acer = iacercaRepository.findById(idacerca).orElse(null);
-        return acer;
+    public Acerca buscarIdAcerca(Long idacerca){
+        return iacercaRepository.findById(idacerca).orElseThrow(null);
     }
-    
 }

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EacApplication {
 
   public static void main(String[] args) {
-  SpringApplication.run(EacApplication.class, args);}
-                        
-  
-}
+    SpringApplication.run(EacApplication.class, args);
+  }
+
+  }

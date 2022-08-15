@@ -1,32 +1,69 @@
 package com.eac.eac.Entity;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
+
 @Entity
-public class Experiencia implements Serializable {
+public class Experiencia {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idexperiencia;
-    @NotNull
-    @Size(min = 1, max = 50, message = "50 caracteres")
-    private String empresaexperiencia;
-    @NotNull
-    @Size(min = 1, max = 50, message = "50 caracteres")
-    private String dateexperiencia;
-    @NotNull
-    @Size(min = 1, max = 50, message = "50 caracteres")
-    private String cargoexperiencia;
-    @NotNull
-    @Size(min = 1, max = 50, message = "50 caracteres")
-    private String contactoexperiencia;
-    
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idExp;
+    private String empresaExp;
+    private String dateExp;
+    private String cargoExp;
+    private String contactoExp;
+
+    public Experiencia() {
+    }
+
+    public Experiencia(Long idExp, String empresaExp, String dateExp, String cargoExp, String contactoExp) {
+        this.idExp = idExp;
+        this.empresaExp = empresaExp;
+        this.dateExp = dateExp;
+        this.cargoExp = cargoExp;
+        this.contactoExp = contactoExp;
+    }
+
+    public Long getIdExp() {
+        return idExp;
+    }
+
+    public void setIdExp(Long idExp) {
+        this.idExp = idExp;
+    }
+
+    public String getEmpresaExp() {
+        return empresaExp;
+    }
+
+    public void setEmpresaExp(String empresaExp) {
+        this.empresaExp = empresaExp;
+    }
+
+    public String getDateExp() {
+        return dateExp;
+    }
+
+    public void setDateExp(String dateExp) {
+        this.dateExp = dateExp;
+    }
+
+    public String getCargoExp() {
+        return cargoExp;
+    }
+
+    public void setCargoExp(String cargoExp) {
+        this.cargoExp = cargoExp;
+    }
+
+    public String getContactoExp() {
+        return contactoExp;
+    }
+
+    public void setContactoExp(String contactoExp) {
+        this.contactoExp = contactoExp;
+    }
 }

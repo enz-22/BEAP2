@@ -1,15 +1,14 @@
 package com.eac.eac.Entity;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Entity
-public class Educacion implements Serializable {
+public class Educacion {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ideducacion;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idEdu;
     private String educacion1;
     private String educacion2;
     private String educacion3;
@@ -18,20 +17,20 @@ public class Educacion implements Serializable {
     public Educacion() {
     }
 
-    public Educacion(Long ideducacion, String educacion1, String educacion2, String educacion3, String educacion4) {
-        this.ideducacion = ideducacion;
+    public Educacion(Long idEdu, String educacion1, String educacion2, String educacion3, String educacion4) {
+        this.idEdu = idEdu;
         this.educacion1 = educacion1;
         this.educacion2 = educacion2;
         this.educacion3 = educacion3;
         this.educacion4 = educacion4;
     }
 
-    public Long getIdeducacion() {
-        return ideducacion;
+    public Long getIdEdu() {
+        return idEdu;
     }
 
-    public void setIdeducacion(Long ideducacion) {
-        this.ideducacion = ideducacion;
+    public void setIdEdu(Long idEdu) {
+        this.idEdu = idEdu;
     }
 
     public String getEducacion1() {

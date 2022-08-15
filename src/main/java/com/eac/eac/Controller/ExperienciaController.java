@@ -1,55 +1,50 @@
 package com.eac.eac.Controller;
 
 import com.eac.eac.Entity.Experiencia;
-import com.eac.eac.Interface.IExperienciaService;
+import com.eac.eac.Service.ImpExperienciaService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin("*")
+@RequestMapping("api/experiencia")
 public class ExperienciaController {
-    @Autowired IExperienciaService iexperienciaService;
-    
-    @GetMapping("/api/experiencias/traer")
-    public List<Experiencia> getExperiencia(){
-        return iexperienciaService.getExperiencia();
+
+    private final ImpExperienciaService impExperienciaService;
+
+    public ExperienciaController(ImpExperienciaService impExperienciaService) {
+        this.impExperienciaService = impExperienciaService;
     }
-    
-    @PostMapping("/api/experiencias/crear")
-    public String createExperiencia(@RequestBody Experiencia experiencia){
-        iexperienciaService.saveExperiencia(experiencia);
-        return "creado correctamente";
+
+    @GetMapping("/id/{idExp}")
+    public ResponseEntity<Experiencia> obtenerExperiencia(@PathVariable("idExp") Long idExp){
+        Experiencia experiencia=impExperienciaService.buscarIdExperiencia(idExp);
+        return new ResponseEntity<>(experiencia, HttpStatus.OK);
     }
-    
-    @DeleteMapping("/api/experiencias/borrar/{idexperiencia}")
-    public String deleteExperiencia(@PathVariable Long idexperiencia){
-    iexperienciaService.deleteExperiencia(idexperiencia);
-    return "el acerca fue borrado correctamente";
+
+    @PutMapping("/update")
+    public ResponseEntity<Experiencia> editarExperiencia(@RequestBody Experiencia experiencia){
+        Experiencia updateExperiencia=impExperienciaService.editarExperiencia(experiencia);
+        return new ResponseEntity<>(updateExperiencia,HttpStatus.OK);
     }
-    
-    @PutMapping("/api/experiencias/editar/{idexperiencia}")
-    public Experiencia editExperiencia(@PathVariable Long idexperiencia,
-            @RequestParam("empresaexperiencia") String nuevoEmpresaexperiencia,
-            @RequestParam("dateexperiencia") String nuevoDateexperiencia,
-            @RequestParam("cargoexperiencia") String nuevoCargoexperiencia,
-            @RequestParam("contactoexperiencia") String nuevoContactoexperiencia)
-                             
-                              {
-                                  
-      Experiencia experiencia = iexperienciaService.FindExperiencia(idexperiencia);
-      experiencia.setEmpresaexperiencia(nuevoEmpresaexperiencia);
-      experiencia.setDateexperiencia(nuevoDateexperiencia);
-      experiencia.setCargoexperiencia(nuevoCargoexperiencia);
-      experiencia.setContactoexperiencia(nuevoContactoexperiencia);
-      
-      iexperienciaService.saveExperiencia(experiencia);
-      return experiencia;
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Experiencia>> buscarExperiencia(){
+        List<Experiencia> experienciaLista=impExperienciaService.buscarExperiencia();
+        return new ResponseEntity<>(experienciaLista,HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Experiencia> crearExperiencia(@RequestBody Experiencia experiencia){
+        Experiencia nuevoExperiencia=impExperienciaService.addExperiencia(experiencia);
+        return new ResponseEntity<>(nuevoExperiencia,HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{idExp}")
+    public ResponseEntity<?> borrarExperiencia(@PathVariable("idExp") Long idExp){
+        impExperienciaService.borrarExperiencia(idExp);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

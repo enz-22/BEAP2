@@ -1,51 +1,51 @@
 package com.eac.eac.Controller;
 
 import com.eac.eac.Entity.Acerca;
-import com.eac.eac.Interface.IAcercaService;
-import java.util.List;
 import com.eac.eac.Service.ImpAcercaService;
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
-@CrossOrigin(origins = "https://localhost:4200")
+
 @RestController
-@RequestMapping("/api/acercas")
-public class AcercaController extends ImpAcercaService {
-    @Autowired IAcercaService iacercaService;
-    
-    @GetMapping("/traer")
-    public List<Acerca> getAcerca(){
-        return iacercaService.getAcerca();
-    }
-    
-    @PostMapping("/crear")
-    public String saveAcerca(@RequestBody Acerca acerca){
-        iacercaService.saveAcerca(acerca);
-        return "creado correctamente";
-    }
-    
+@CrossOrigin("*")
+@RequestMapping("api/acerca")
+public class AcercaController {
 
-    @DeleteMapping("/borrar/{idacerca}")
-    public String deleteAcerca(@PathVariable Long idacerca){ iacercaService.deleteAcerca(idacerca);
-        return "eliminado correctamente";
+    private final ImpAcercaService impAcercaService;
+
+    public AcercaController(ImpAcercaService impAcercaService) {
+        this.impAcercaService = impAcercaService;
     }
 
-    
-    @PutMapping("/editar/{idacerca}")
-    public Acerca editAcerca(@PathVariable Long idacerca,@RequestParam("nombreacerca") String nuevoNombreacerca,@RequestParam("contactoacerca") String nuevoContactoacerca,@RequestParam("detalleacerca") String nuevoDetalleacerca,@RequestParam("fotoacerca") String nuevoFotoacerca){
-                                  
-      Acerca acerca = iacercaService.FindAcerca(idacerca);
-      acerca.setNombreacerca(nuevoNombreacerca);
-      acerca.setContactoacerca(nuevoContactoacerca);
-      acerca.setDetalleacerca(nuevoDetalleacerca);
-      acerca.setFotoacerca(nuevoFotoacerca);
-      
-      iacercaService.saveAcerca(acerca);
-      return acerca;
+    @GetMapping("/id/{idacerca}")
+    public ResponseEntity<Acerca> obtenerAcerca(@PathVariable("idacerca") Long idacerca){
+        Acerca acerca=impAcercaService.buscarIdAcerca(idacerca);
+        return new ResponseEntity<>(acerca, HttpStatus.OK);
     }
-    
-    @GetMapping("/traer/{idacerca}")
-   public Acerca findAcerca(Long idacerca){
-       return iacercaService.FindAcerca(idacerca);
-   }
+
+    @PutMapping("/update")
+    public ResponseEntity<Acerca> editarAcerca(@RequestBody Acerca acerca){
+        Acerca updateAcerca=impAcercaService.editarAcerca(acerca);
+        return new ResponseEntity<>(updateAcerca,HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Acerca>> buscarAcerca(){
+        List<Acerca> acercaLista=impAcercaService.buscarAcerca();
+        return new ResponseEntity<>(acercaLista,HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Acerca> crearAcerca(@RequestBody Acerca acerca){
+        Acerca nuevoAcerca=impAcercaService.addAcerca(acerca);
+        return new ResponseEntity<>(nuevoAcerca,HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{idacerca}")
+    public ResponseEntity<?> borrarAcerca(@PathVariable("idacerca") Long idacerca){
+        impAcercaService.borrarAcerca(idacerca);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
