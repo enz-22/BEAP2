@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "https://appi2206.herokuapp.com/")
+@CrossOrigin(origins = "https://appieac.web.app")
 @RequestMapping("api/acerca")
 public class AcercaController {
 
