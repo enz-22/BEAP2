@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "https://appi2206.herokuapp.com/")
 @RequestMapping("api/skills")
 public class SkillController {
 

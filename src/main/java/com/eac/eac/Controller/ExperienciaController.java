@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "https://appi2206.herokuapp.com/")
 @RequestMapping("api/experiencia")
 public class ExperienciaController {
 
