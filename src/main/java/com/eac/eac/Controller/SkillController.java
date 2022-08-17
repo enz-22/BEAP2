@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "https://appieac.web.app")
+@CrossOrigin(origins = "https://appieac.web.app/")
 @RequestMapping("api/skills")
 public class SkillController {
 

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "https://appieac.web.app")
+@CrossOrigin(origins = "https://appieac.web.app/")
 public class AuthApi {
     @Autowired
     AuthenticationManager authManager;
