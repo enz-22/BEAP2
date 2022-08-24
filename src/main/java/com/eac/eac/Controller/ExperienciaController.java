@@ -20,7 +20,7 @@ public class ExperienciaController {
         this.impExperienciaService = impExperienciaService;
     }
 
-    @GetMapping("/id/{idExp}")
+    @GetMapping("/id/{idPro}")
     public ResponseEntity<Experiencia> obtenerExperiencia(@PathVariable("idExp") Long idExp){
         Experiencia experiencia=impExperienciaService.buscarIdExperiencia(idExp);
         return new ResponseEntity<>(experiencia, HttpStatus.OK);
@@ -35,7 +35,7 @@ public class ExperienciaController {
     @GetMapping("/all")
     public ResponseEntity<List<Experiencia>> buscarExperiencia(){
         List<Experiencia> experienciaLista=impExperienciaService.buscarExperiencia();
-        return new ResponseEntity<>(experienciaLista,HttpStatus.OK);
+        return new ResponseEntity<>(experienciaLista, HttpStatus.OK);
     }
 
     @PostMapping("/add")
@@ -43,7 +43,8 @@ public class ExperienciaController {
         Experiencia nuevoExperiencia=impExperienciaService.addExperiencia(experiencia);
         return new ResponseEntity<>(nuevoExperiencia, HttpStatus.CREATED);
     }
-    @DeleteMapping("/delete/{idExp}")
+
+    @DeleteMapping("/delete/{idPro}")
     public ResponseEntity<?> borrarExperiencia(@PathVariable("idExp") Long idExp){
         impExperienciaService.borrarExperiencia(idExp);
         return new ResponseEntity<>(HttpStatus.OK);
