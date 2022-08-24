@@ -38,11 +38,10 @@ public class ExperienciaController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Experiencia> crearExperiencia(@RequestBody Experiencia experiencia){
-        Experiencia nuevoExperiencia=impExperienciaService.addExperiencia(experiencia);
-        return new ResponseEntity<>(nuevoExperiencia,HttpStatus.CREATED);
-    }
-
+        public ResponseEntity<Experiencia> crearExperiencia(@RequestBody Experiencia experiencia){
+            Experiencia nuevoExperiencia=impExperienciaService.addExperiencia(experiencia);
+           return new ResponseEntity<>(nuevoExperiencia,HttpStatus.CREATED);
+        }
     @DeleteMapping("/delete/{idExp}")
     public ResponseEntity<?> borrarExperiencia(@PathVariable("idExp") Long idExp){
         impExperienciaService.borrarExperiencia(idExp);
