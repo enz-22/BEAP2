@@ -16,11 +16,10 @@ public class ExperienciaController {
     private final ImpExperienciaService impExperienciaService;
 
     public ExperienciaController(ImpExperienciaService impExperienciaService) {
-
         this.impExperienciaService = impExperienciaService;
     }
 
-    @GetMapping("/id/{idPro}")
+    @GetMapping("/id/{idExp}")
     public ResponseEntity<Experiencia> obtenerExperiencia(@PathVariable("idExp") Long idExp){
         Experiencia experiencia=impExperienciaService.buscarIdExperiencia(idExp);
         return new ResponseEntity<>(experiencia, HttpStatus.OK);
@@ -41,10 +40,10 @@ public class ExperienciaController {
     @PostMapping("/add")
     public ResponseEntity<Experiencia> crearExperiencia(@RequestBody Experiencia experiencia){
         Experiencia nuevoExperiencia=impExperienciaService.addExperiencia(experiencia);
-        return new ResponseEntity<>(nuevoExperiencia, HttpStatus.CREATED);
+        return new ResponseEntity<>(nuevoExperiencia,HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{idPro}")
+    @DeleteMapping("/delete/{idExp}")
     public ResponseEntity<?> borrarExperiencia(@PathVariable("idExp") Long idExp){
         impExperienciaService.borrarExperiencia(idExp);
         return new ResponseEntity<>(HttpStatus.OK);

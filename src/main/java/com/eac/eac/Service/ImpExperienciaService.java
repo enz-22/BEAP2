@@ -1,9 +1,7 @@
 package com.eac.eac.Service;
 
 import com.eac.eac.Entity.Experiencia;
-import com.eac.eac.Entity.Proyecto;
 import com.eac.eac.Repository.IExperienciaRepository;
-import com.eac.eac.Repository.IProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -19,28 +17,13 @@ public class ImpExperienciaService {
         this.iexperienciaRepository = iexperienciaRepository;
     }
 
-    public Experiencia addExperiencia(Experiencia experiencia){
+    public Experiencia addExperiencia(Experiencia experiencia){ return iexperienciaRepository.save(experiencia);}
 
-        return iexperienciaRepository.save(experiencia);
-    }
+    public List<Experiencia> buscarExperiencia(){ return iexperienciaRepository.findAll();}
 
-    public List<Experiencia> buscarExperiencia(){
+    public Experiencia editarExperiencia(Experiencia experiencia){ return iexperienciaRepository.save(experiencia);}
 
-        return iexperienciaRepository.findAll();
-    }
+    public void borrarExperiencia(Long idExp){ iexperienciaRepository.deleteById(idExp);}
 
-    public Experiencia editarExperiencia(Experiencia experiencia){
-
-        return iexperienciaRepository.save(experiencia);
-    }
-
-    public void borrarExperiencia(Long idExp){
-
-        iexperienciaRepository.deleteById(idExp);
-    }
-
-    public Experiencia buscarIdExperiencia(Long idExp){
-
-        return iexperienciaRepository.findById(idExp).orElseThrow(null);
-    }
+    public Experiencia buscarIdExperiencia(Long idExp){ return iexperienciaRepository.findById(idExp).orElseThrow(null);}
 }
