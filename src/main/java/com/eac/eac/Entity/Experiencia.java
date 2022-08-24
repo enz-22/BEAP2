@@ -28,18 +28,22 @@ public class Experiencia {
     }
 
     public Long getIdExp() {
+
         return idExp;
     }
 
     public void setIdExp(Long idExp) {
+
         this.idExp = idExp;
     }
 
     public String getEmpresaExp() {
+
         return empresaExp;
     }
 
     public void setEmpresaExp(String empresaExp) {
+
         this.empresaExp = empresaExp;
     }
 
@@ -48,22 +52,27 @@ public class Experiencia {
     }
 
     public void setDateExp(String dateExp) {
+
         this.dateExp = dateExp;
     }
 
     public String getCargoExp() {
+
         return cargoExp;
     }
 
     public void setCargoExp(String cargoExp) {
+
         this.cargoExp = cargoExp;
     }
 
     public String getContactoExp() {
+
         return contactoExp;
     }
 
     public void setContactoExp(String contactoExp) {
+
         this.contactoExp = contactoExp;
     }
 }
