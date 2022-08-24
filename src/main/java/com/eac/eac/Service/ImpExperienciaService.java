@@ -1,7 +1,9 @@
 package com.eac.eac.Service;
 
 import com.eac.eac.Entity.Experiencia;
+import com.eac.eac.Entity.Proyecto;
 import com.eac.eac.Repository.IExperienciaRepository;
+import com.eac.eac.Repository.IProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -38,6 +40,7 @@ public class ImpExperienciaService {
     }
 
     public Experiencia buscarIdExperiencia(Long idExp){
+
         return iexperienciaRepository.findById(idExp).orElseThrow(null);
     }
 }
